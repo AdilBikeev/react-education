@@ -1,0 +1,16 @@
+.a {
+  text-decoration: none;
+  color: black;
+}
+
+.a:hover {
+  color: grey;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  background-color: darkgray;
+  margin: 0;
+}
