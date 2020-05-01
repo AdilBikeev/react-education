@@ -8,8 +8,8 @@ import Music from './Music/Music'
 const Content = (props) => {
   return (
     <div className={s.content}>
-      <Route path='/news' render={ () => <News store={props.store}/> } />
-      <Route path='/messages' render={ () => <Messages store={props.store} />}  />
+      <Route path='/news' render={ () => <News store={props.store} addPost={props.addPost} /> } />
+      <Route path='/messages' render={ () => <Messages state={props.store.state} />}  />
       <Route path='/music' render={ () => <Music/>} />
     </div>
   )

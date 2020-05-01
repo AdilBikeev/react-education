@@ -1,31 +1,25 @@
 import React from 'react'
 import PostItem from './PostItem'
-import {rerenderEntireTree} from './../../../../index'
 
 const News = (props) => {
-
-  let posts = props.store.posts.map( p => <PostItem id={p.id} message={p.message} /> )
+  let posts = props.store.state.posts.map( p => <PostItem id={p.id} message={p.message} /> )
 
   let textarea = React.createRef()
 
   let onTextChange = () => {
     let text = textarea.current.value
-    props.store.newPostText = text
+    props.store.state.newPostText = text
+    console.log(props.store.state.newPostText)
   }
 
   let addPost = () => {
-    let newPost = {
-      id: '3',
-      message: textarea.current.value
-    }
-    props.store.posts.push(newPost)
-    textarea.current.value = ''
-    rerenderEntireTree()
+    let text = textarea.current.value
+    props.addPost(text)
   }
 
   return (
     <div className="">
-      <textarea ref={textarea} onChange={onTextChange} placeholder="What's new?" name=""/> <br/>
+      <textarea ref={textarea} onChange={onTextChange} placeholder="What's new?"/> <br/>
       <button onClick={addPost}>publish</button>
       {posts}
     </div>

@@ -4,15 +4,14 @@ import Header from './Components/Header/Header'
 import Sidebar from './Components/Body/Sidebar/Sidebar'
 import { BrowserRouter } from 'react-router-dom'
 import Content from './Components/Body/Content/Content';
-import store from './redux/store'
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter className="App">
       <Header />
       <div className='body'>
         <Sidebar />
-        <Content store={store} />
+        <Content store={props.store} addPost={props.addPost} />
       </div>
     </BrowserRouter>
   );
