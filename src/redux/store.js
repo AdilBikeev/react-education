@@ -11,32 +11,30 @@ let store = {
       {id: '1', message: 'Yo guys, how are u?'},
       {id: '2', message: 'This my post from my flat!'},
     ],
-    newPostText: 'Успех!',
+    newPostText: 'Success!',
   },
 
   _callSubscriber() {
     console.log('state has changed')
   },
-
   subscribe(observer) {
     this._callSubscriber = observer
   },
 
-  addPost() {
-    let newPost = {
-      id: '3',
-      message: this._state.newPostText,
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: '3',
+        message: this._state.newPostText,
+      }
+      this._state.posts.push(newPost)
+      this._state.newPostText = ''
+      this._callSubscriber(this)
+    } else if (action.type === 'TEXT-CHANGE') {
+      this._state.newPostText = action.newText
+      this._callSubscriber(this)
     }
-    this._state.posts.push(newPost)
-    this._state.newPostText = ''
-    this._callSubscriber(this)
-  },
-
-  textChange(newText) {
-    this._state.newPostText = newText
-    this._callSubscriber(this)
-  },
-
+  }
 }
 
 window.store = store

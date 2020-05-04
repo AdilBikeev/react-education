@@ -9,11 +9,12 @@ const News = (props) => {
 
   let onTextChange = () => {
     let text = textarea.current.value
-    props.textChange(text)
+    props.dispatch({type: 'TEXT-CHANGE', newText: text})
   }
 
   let addPost = () => {
-    props.addPost()
+    let action = {type: 'ADD-POST'}
+    props.dispatch(action)
   }
   return (
     <div className="">
