@@ -11,7 +11,7 @@ function App(props) {
       <Header />
       <div className='body'>
         <Sidebar />
-        <Content store={props.store} addPost={props.addPost} />
+        <Content store={props.store} addPost={props.addPost} textChange={props.textChange} />
       </div>
     </BrowserRouter>
   );
