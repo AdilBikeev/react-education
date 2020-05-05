@@ -14,3 +14,7 @@
   background-color: darkgray;
   margin: 0;
 }
+
+.active {
+  color: red;
+}

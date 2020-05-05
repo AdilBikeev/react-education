@@ -1,3 +1,6 @@
+const TEXT_CHANGE = 'TEXT-CHANGE';
+const ADD_POST = 'ADD-POST'
+
 let store = {
   _state: {
     friends: [
@@ -22,19 +25,35 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
-      let newPost = {
-        id: '3',
-        message: this._state.newPostText,
-      }
-      this._state.posts.push(newPost)
-      this._state.newPostText = ''
-      this._callSubscriber(this)
-    } else if (action.type === 'TEXT-CHANGE') {
+    if (action.type === ADD_POST) {
+        let newPost = {
+            id: '3',
+            message: this._state.newPostText,
+        }
+        if (newPost.message === '') return false
+        else {
+            this._state.posts.push(newPost)
+            this._state.newPostText = ''
+            this._callSubscriber(this)
+        }
+    } else if (action.type === TEXT_CHANGE) {
       this._state.newPostText = action.newText
       this._callSubscriber(this)
     }
   }
+}
+
+
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    }
+}
+
+export const textChangeActionCreator = (text) => {
+    return {
+        type: TEXT_CHANGE,
+        newText: text}
 }
 
 window.store = store

@@ -1,5 +1,7 @@
 import React from 'react'
 import PostItem from './PostItem'
+import {addPostActionCreator, textChangeActionCreator} from "../../../../redux/store";
+
 
 const News = (props) => {
   debugger
@@ -9,11 +11,11 @@ const News = (props) => {
 
   let onTextChange = () => {
     let text = textarea.current.value
-    props.dispatch({type: 'TEXT-CHANGE', newText: text})
+    props.dispatch(textChangeActionCreator(text))
   }
 
   let addPost = () => {
-    let action = {type: 'ADD-POST'}
+    let action = addPostActionCreator()
     props.dispatch(action)
   }
   return (
