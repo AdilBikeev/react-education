@@ -4,6 +4,7 @@ import { textChangeActionCreator, addPostActionCreator } from '../../../../redux
 
 
 const News = (props) => {
+  debugger;
   let posts = props.state.posts.map( p => <PostItem key={p.id} message={p.message} /> )
 
   let textarea = React.createRef()
