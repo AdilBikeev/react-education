@@ -2,9 +2,7 @@ import React from 'react'
 import Participant from './Participant'
 import s from './Messages.module.css'
 import Dialogs from './Dialogs'
-
-import { textChangeMessageActionCreator, addMessageActionCreator } from './../../../../redux/store';
-
+import { textChangeMessageActionCreator, addMessageActionCreator } from '../../../../redux/messageReducer'
 
 const Messages = (props) => {
   let friends = props.state.friends.map(d => <Participant

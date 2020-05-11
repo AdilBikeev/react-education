@@ -1,8 +1,5 @@
-const TEXT_CHANGE = 'TEXT-CHANGE';
-const ADD_POST = 'ADD-POST';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const GET_MSG_FRIEND_BY_ID = 'GET-MSG-FRIEND-BY-ID';
-const TEXT_CHANGE_MESSAGE = 'TEXT-CHANGE-MESSAGE';
+import messageReducer from "./messageReducer";
+import postReducer from "./postReducer";
 
 let store = {
   _state: {
@@ -49,64 +46,9 @@ let store = {
   },
 
   dispatch(action) {
-    debugger;
-    if (action.type === ADD_POST) {
-      let newPost = {
-        id: '3',
-        message: this._state.newPostText,
-      }
-      if (newPost.message === '') return false
-      else {
-        this._state.News.posts.push(newPost)
-        this._state.newPostText = ''
-        this._callSubscriber(this)
-      }
-    } else if (action.type === TEXT_CHANGE) {
-      this._state.newPostText = action.newText
-      this._callSubscriber(this)
-    } else if (action.type === GET_MSG_FRIEND_BY_ID) {
-      this._state.Messages.messages.filter(x => x.idFrined === action.idFrined);
-    } else if (action.type === TEXT_CHANGE_MESSAGE) {
-      this._state.Messages.messageNew = action.newText;
-      this._callSubscriber(this);
-    } else if (action.type === ADD_MESSAGE) {
-      debugger;
-      this._state.Messages.messages.push(action.message);
-      this._callSubscriber(this);
-    }
-  }
-};
-
-
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST
-  }
-};
-
-export const addMessageActionCreator = () => {
-  return {
-    type: ADD_MESSAGE,
-    message: {
-      id: store._state.Messages.messages.length,
-      name: 'Me',
-      message: store._state.Messages.messageNew,
-      dateSend: new Date(Date.now())
-    }
-  };
-};
-
-export const textChangeActionCreator = (text) => {
-  return {
-    type: TEXT_CHANGE,
-    newText: text
-  }
-};
-
-export const textChangeMessageActionCreator = (text) => {
-  return {
-    type: TEXT_CHANGE_MESSAGE,
-    newText: text
+    postReducer(this._state.News, action);
+    messageReducer(this._state.Messages, action);
+    this._callSubscriber(this);
   }
 };
 

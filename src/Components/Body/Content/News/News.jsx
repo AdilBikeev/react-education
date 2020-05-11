@@ -1,6 +1,6 @@
 import React from 'react'
 import PostItem from './PostItem'
-import {addPostActionCreator, textChangeActionCreator} from "../../../../redux/store";
+import { textChangeActionCreator, addPostActionCreator } from '../../../../redux/postReducer'
 
 
 const News = (props) => {
