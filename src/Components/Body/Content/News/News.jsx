@@ -1,26 +1,27 @@
 import React from 'react'
 import PostItem from './PostItem'
-import { textChangeActionCreator, addPostActionCreator } from '../../../../redux/postReducer'
-
 
 const News = (props) => {
   debugger;
-  let posts = props.state.posts.map( p => <PostItem key={p.id} message={p.message} /> )
+  let posts = props.posts.map( p => <PostItem key={p.id} message={p.message} /> )
 
   let textarea = React.createRef()
 
   let onTextChange = () => {
     let text = textarea.current.value
-    props.dispatch(textChangeActionCreator(text))
+    props.changeNewsText(text)
   }
 
   let addPost = () => {
-    let action = addPostActionCreator()
-    props.dispatch(action)
+    props.addPost();
   }
+
   return (
     <div>
-      <textarea ref={textarea} onChange={onTextChange} placeholder="What's new?" value={props.state.newPostText}/> <br/>
+      <textarea ref={textarea} 
+                onChange={onTextChange} 
+                placeholder="What's new?" 
+                value={props.newsText}/> <br/>
       <button onClick={addPost}>publish</button>
       {posts}
     </div>
