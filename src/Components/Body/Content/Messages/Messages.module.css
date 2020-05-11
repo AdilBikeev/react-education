@@ -1,0 +1,13 @@
+﻿.messages {
+    display: grid;
+    grid-template-columns: 2fr 13.5fr;
+    background-color: red;
+}
+
+.friendsList {
+
+}
+
+.messagesList {
+
+}
