@@ -10,6 +10,7 @@ let initialState = {
 }
 
 const postReducer = (state = initialState, action) => {
+  console.log(state);
   if (action.type === ADD_POST) {
     let newPost = {
       id: '3',

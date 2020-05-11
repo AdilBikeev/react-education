@@ -8,8 +8,8 @@ import MessagesContainer from './Messages/MessagsConstainer'
 const Content = (props) => {
   return (
     <div className={s.content}>
-      <Route path='/news' render={ () => <NewsContainer state={props.state.News} dispatch={props.dispatch} /> } />
-      <Route path='/messages' render={ () => <MessagesContainer state={props.state.Messages} dispatch={props.dispatch}/>}  />
+      <Route path='/news' render={ () => <NewsContainer /> } />
+      <Route path='/messages' render={ () => <MessagesContainer />}  />
       <Route path='/music' render={ () => <Music/>} />
     </div>
   )

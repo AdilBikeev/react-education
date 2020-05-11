@@ -3,7 +3,7 @@ import PostItem from './PostItem'
 
 const News = (props) => {
   debugger;
-  let posts = props.posts.map( p => <PostItem key={p.id} message={p.message} /> )
+  let posts = props.News.posts.map( p => <PostItem key={p.id} message={p.message} /> )
 
   let textarea = React.createRef()
 
@@ -21,7 +21,7 @@ const News = (props) => {
       <textarea ref={textarea} 
                 onChange={onTextChange} 
                 placeholder="What's new?" 
-                value={props.newsText}/> <br/>
+                value={props.News.newPostText}/> <br/>
       <button onClick={addPost}>publish</button>
       {posts}
     </div>
