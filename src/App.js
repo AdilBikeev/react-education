@@ -11,7 +11,7 @@ function App(props) {
       <Header />
       <div className='body'>
         <Sidebar />
-        <Content store={props.store} dispatch={props.dispatch} />
+        <Content state={props.state} dispatch={props.dispatch} />
       </div>
     </BrowserRouter>
   );

@@ -4,8 +4,8 @@ import {addPostActionCreator, textChangeActionCreator} from "../../../../redux/s
 
 
 const News = (props) => {
-  debugger
-  let posts = props.store._state.posts.map( p => <PostItem id={p.id} message={p.message} /> )
+  debugger;
+  let posts = props.state.posts.map( p => <PostItem id={p.id} message={p.message} /> )
 
   let textarea = React.createRef()
 
@@ -20,7 +20,7 @@ const News = (props) => {
   }
   return (
     <div className="">
-      <textarea ref={textarea} onChange={onTextChange} placeholder="What's new?" value={props.store._state.newPostText}/> <br/>
+      <textarea ref={textarea} onChange={onTextChange} placeholder="What's new?" value={props.state.newPostText}/> <br/>
       <button onClick={addPost}>publish</button>
       {posts}
     </div>
