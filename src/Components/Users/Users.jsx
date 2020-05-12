@@ -6,24 +6,9 @@ export const Users = (props) => {
 
     if(props.users.length === 0)
     {
-        /*
-        props.setUsers([
-            {
-                id: 1, photoUrl: 'https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/topics/global-review/2019/ey-staff-at-event.jpg',
-                followed: false, fullName: 'Dima', status: 'I am a boss', location: { city: 'Moscow', country: 'Russia' }
-            },
-            {
-                id: 2, photoUrl: 'https://www.yourdictionary.com/images/definitions/lg/10531.people.jpg',
-                followed: true, fullName: 'Andrey', status: 'I am a boss', location: { city: 'Moscow', country: 'Russia' }
-            },
-            {
-                id: 3, photoUrl: 'https://easyspeak.ru/assets/cache/images/blog/difference/people/619x291-pexels-photo-325521.6a4.jpg',
-                followed: false, fullName: 'Sacha', status: 'I am a boss', location: { city: 'Moscow', country: 'Russia' }
-            }
-        ]);*/
-        axios.get("https://social-network.samuraijs.com/api/1.0")
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
              .then(response => {
-                debugger;   
+                props.setUsers(response.data.items); 
              });
     }
 
@@ -33,7 +18,7 @@ export const Users = (props) => {
                 props.users.map(x => <div key={x.id}>
                     <span>
                         <div>
-                            <img className={s.userPhoto} alt='Photo' src={x.photoUrl} />
+                            <img alt='images' className={s.userPhoto} src={x.photos.small != null ? x.photos.small : 'https://avatars.mds.yandex.net/get-pdb/1920690/8846c29f-cdf4-4249-a1d0-83cef96661d0/s1200' } />
                         </div>
                         <div>
                             {x.followed === true ?
