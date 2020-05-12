@@ -1,12 +1,24 @@
 import * as serviceWorker from './serviceWorker';
 import store from './redux/reduxStore'
 import './index.css';
-import renderEntireTree from './render';
+import React from 'react'
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from "react-router-dom";
 
-renderEntireTree(store)
+import App from './App';
+import { Provider } from 'react-redux';
 
-store.subscribe(() => {
-    renderEntireTree(store);
-})
+let renderEntireTree = () => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </BrowserRouter>, document.getElementById('root'));
+}
+
+renderEntireTree();
+
+store.subscribe(renderEntireTree)
 
 serviceWorker.unregister();

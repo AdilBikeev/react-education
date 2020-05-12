@@ -4,6 +4,7 @@ import News from './News';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
+  debugger;
   return {
     News: state.News
   };
