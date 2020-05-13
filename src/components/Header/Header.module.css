@@ -1,8 +1,9 @@
-.logo {
-  width: 80px;
+.header {
+    grid-area: h;
+    background-color: green;
 }
 
-.header {
-  background-color: black;
-  margin-bottom: 20px;
+.header img {
+    width: 20px;
 }
+

@@ -1,44 +1,59 @@
-﻿import React from 'react';
-import s from './Users.module.css';
-import { Preloader } from '../common/Preloader';
+import React from 'react';
+import styles from "./users.module.css";
+import userPhoto from "../../assets/images/user.png";
+import {NavLink} from "react-router-dom";
 
-export const Users = (props) => {
+let Users = (props) => {
+
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
     let pages = [];
-    let countPage = Math.ceil(props.countPages / props.totalUsersCount);
-    for (let i = 1; i <= countPage; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+
     return <div>
-        <>
-        {props.isFetching ? <Preloader /> : null}
-        </>
         <div>
-            {
-                pages.map(x => {
-                    return <span className={x === props.currentPage ? s.selectedPage : ''}
-                        onClick={() => { props.selectedPage(x) }}>{x}</span>
-                })
-            }
+            {pages.map(p => {
+                return <span className={props.currentPage === p && styles.selectedPage}
+                             onClick={(e) => {
+                                 props.onPageChanged(p);
+                             }}>{p}</span>
+            })}
         </div>
         {
-            props.users.map(x => <div key={x.id}>
+            props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img alt='images' className={s.userPhoto} src={x.photos.small != null ? x.photos.small : 'https://avatars.mds.yandex.net/get-pdb/1920690/8846c29f-cdf4-4249-a1d0-83cef96661d0/s1200'} />
+                       <NavLink to={'/profile/' + u.id}>
+                        <img alt='profilePhoto' src={u.photos.small != null ? u.photos.small : userPhoto}
+                             className={styles.userPhoto}/>
+                       </NavLink>
                     </div>
                     <div>
-                        {x.followed === true ?
-                            <button onClick={() => { props.unfollow(x.id) }}>Follow</button>
-                            : <button onClick={() => { props.follow(x.id) }}>unFollow</button>}
+                        {u.followed
+                            ? <button onClick={() => {
+                                props.unfollow(u.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                props.follow(u.id)
+                            }}>Follow</button>}
+
                     </div>
                 </span>
                 <span>
                     <span>
-                        <div>{x.name}</div>
-                        <div>{x.status != null ? x.status : 'defaultStatus'}</div>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
+                    </span>
+                    <span>
+                        <div>{"u.location.country"}</div>
+                        <div>{"u.location.city"}</div>
                     </span>
                 </span>
             </div>)
         }
     </div>
-};
+}
+
+export default Users;

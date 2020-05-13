@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { connect } from 'react-redux';
-import { Profile } from './Profile';
+import Profile from './Profile';
 import * as axios from 'axios';
 import { setUserProfile, toggleIsFething } from '../../redux/profile-reducer';
 import { Preloader } from '../common/Preloader';

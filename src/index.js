@@ -1,4 +1,3 @@
-
 import * as serviceWorker from './serviceWorker';
 import store from "./redux/redux-store";
 import React from 'react';
@@ -21,5 +20,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-    
