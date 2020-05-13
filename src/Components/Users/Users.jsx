@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import s from './Users.module.css';
+import { Preloader } from '../common/Preloader';
 
 export const Users = (props) => {
     let pages = [];
@@ -8,6 +9,9 @@ export const Users = (props) => {
         pages.push(i);
     }
     return <div>
+        <>
+        {props.isFetching ? <Preloader /> : null}
+        </>
         <div>
             {
                 pages.map(x => {
