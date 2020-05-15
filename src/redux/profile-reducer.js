@@ -1,21 +1,25 @@
+import { toggleIsFetching, setUsers, setCurrentPage } from "./users-reducer";
+import { usersAPI } from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 12},
-        {id: 2, message: 'It\'s my first post', likesCount: 11},
-        {id: 3, message: 'Blabla', likesCount: 11},
-        {id: 4, message: 'Dada', likesCount: 11}
+        { id: 1, message: 'Hi, how are you?', likesCount: 12 },
+        { id: 2, message: 'It\'s my first post', likesCount: 11 },
+        { id: 3, message: 'Blabla', likesCount: 11 },
+        { id: 4, message: 'Dada', likesCount: 11 }
     ],
     newPostText: 'it-kamasutra.com',
-    profile: null
+    profile: null,
+    IsAuthorize: false
 };
 
 const profileReducer = (state = initialState, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case ADD_POST: {
             let newPost = {
                 id: 5,
@@ -35,7 +39,7 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SET_USER_PROFILE: {
-            return {...state, profile: action.profile}
+            return { ...state, profile: action.profile }
         }
         default:
             return state;
@@ -43,9 +47,21 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+export const addPostActionCreator = () => ({ type: ADD_POST })
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const updateNewPostTextActionCreator = (text) =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text })
+    ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+
+export const getUsers = (pageNumber, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(pageNumber));
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(pageNumber, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+            });
+    }
+}
 
 export default profileReducer;
